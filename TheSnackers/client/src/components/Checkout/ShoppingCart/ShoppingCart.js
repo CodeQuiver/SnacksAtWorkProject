@@ -155,9 +155,11 @@ class ShoppingCart extends React.Component {
                 return accumulator + item.calcPrice;
             }, 0);
 
-        console.log(newSubTotal);
+        console.log("newSubTotal: " + newSubTotal);
 
         this.state.subtotalPrice = newSubTotal;
+
+        console.log("new subtotal state value: " + this.state.subtotalPrice);
 
         // this.state.finalTotalPrice = subtotalPrice + (tax * subtotalprice)        
 
@@ -184,7 +186,7 @@ class ShoppingCart extends React.Component {
             <div className="ShoppingCart">
                 <h3 className="page-header">Your Order:</h3>
                 <table className="highlight">
-                    <thead className="row">
+                    <tr className="row">
                         <th className="col s5 cart-header">
                             Snack
                         </th>
@@ -200,7 +202,7 @@ class ShoppingCart extends React.Component {
                         <th className="col s1 cart-header">
                             {/* blank because above cart remove button column */}
                         </th>
-                    </thead>
+                    </tr>
                     <tbody>
                         {/* Each row will be a "dumb component" item listing, receiving props from ShoppingCart */}
                         {/* <SnackItem quantity={this.state.cartItems[0].quantity} 
