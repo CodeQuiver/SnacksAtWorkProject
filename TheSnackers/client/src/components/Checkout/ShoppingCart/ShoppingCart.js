@@ -28,7 +28,8 @@ Features:
 
     3) store in state (for now)
         a. array of items in cart, including: id, name, quantity
-        b. final order total
+        b. order subtotal
+        c. final order total
 
 TODO- once this module is complete, modify so Checkout page will manage the state of the order (lift cart's state up)
 
@@ -143,31 +144,45 @@ class ShoppingCart extends React.Component {
         }
         //END calcPriceHandler helper function
 
-        //use function to calculate and store total price (calcPrice) for each array item in state
+
+        // LINE PRICE (calcPrice) calculation
+        //calculate and store total price (calcPrice) for each item in state
         for (let i = 0; i < this.state.cartItems.length; i++) {
             const item = this.state.cartItems[i];
             item.calcPrice = calcPriceHandler(item.unitPrice, item.quantity);
         }
+        // END LINE PRICE (calcPrice) calculation
 
-        // this.state.subtotalPrice = reduce()//use reduce to add all calcPrice values in array together
+
+        // SUBTOTAL Calculation
         let newSubTotal = this.state.cartItems.reduce(
             function (accumulator, item) {
-                return accumulator + item.calcPrice;
+                // convert decimals to integers (*100) to avoid imprecise float calculations
+                let localPrice = item.calcPrice * 100;
+                // add to accumulator
+                let localTotalPrice = accumulator + localPrice;
+
+                return localTotalPrice;
             }, 0);
+            // console.log("newSubTotal: " + newSubTotal);
 
-        console.log("newSubTotal: " + newSubTotal);
+        this.state.subtotalPrice = newSubTotal / 100; //convert total back to decimals by dividing again by 100 before updating state value
 
-        this.state.subtotalPrice = newSubTotal;
+            // console.log("new subtotal state value: " + this.state.subtotalPrice);
+        // END SUBTOTAL Calculation
 
-        console.log("new subtotal state value: " + this.state.subtotalPrice);
 
-        // this.state.finalTotalPrice = subtotalPrice + (tax * subtotalprice)        
+        //TOTAL ORDER PRICE Calculation
+        // this.state.finalTotalPrice = subtotalPrice + (tax * subtotalprice)
+        // let newFinalTotal = this.state.subtotalPrice + (TAX * )      
+        
 
+        // END TOTAL ORDER PRICE Calculation
 
     }
 
-
-    //function to render each line item
+    // RENDER LINE ITEM
+    // function to render the listing for each snack being ordered
     renderItem = (i) => {
 
         return <SnackItem 
@@ -179,7 +194,10 @@ class ShoppingCart extends React.Component {
         id={this.state.cartItems[i].id} key={i}
         />;
     }
+    // END RENDER LINE ITEM
 
+
+    // MAIN ShoppingCart RENDER SECTION
     render() {
         return (
     
@@ -222,6 +240,8 @@ class ShoppingCart extends React.Component {
             </div>
         );
     }
+    // END MAIN ShoppingCart RENDER SECTION
+
 }
 
 export default ShoppingCart;
