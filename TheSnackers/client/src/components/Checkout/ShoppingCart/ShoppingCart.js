@@ -150,6 +150,15 @@ class ShoppingCart extends React.Component {
         }
 
         // this.state.subtotalPrice = reduce()//use reduce to add all calcPrice values in array together
+        let newSubTotal = this.state.cartItems.reduce(
+            function (accumulator, item) {
+                return accumulator + item.calcPrice;
+            }, 0);
+
+        console.log(newSubTotal);
+
+        this.state.subtotalPrice = newSubTotal;
+
         // this.state.finalTotalPrice = subtotalPrice + (tax * subtotalprice)        
 
 

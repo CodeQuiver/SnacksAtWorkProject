@@ -6,14 +6,14 @@ const NavigationTabs = () => (
         <li className="nav-item">
             <Link to="/" className="nav-link active">Home</Link>
         </li>
-        <li classname="nav-item">
+        <li className="nav-item">
             <Link to="/about" className="nav-link">About</Link>
         </li>
         <li className="nav-item">
-            <Link to ="/snacks" classname="nav-link">Snacks</Link>
+            <Link to ="/snacks" className="nav-link">Snacks</Link>
         </li>
         <li className="nav-item">
-            <Link to ="/cart" classname="nav-link">Cart</Link>
+            <Link to ="/cart" className="nav-link">Cart</Link>
         </li>
 
 
