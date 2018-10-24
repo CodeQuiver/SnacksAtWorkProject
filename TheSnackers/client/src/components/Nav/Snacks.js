@@ -24,7 +24,7 @@ class Snacks extends Component {
         <div>
                   {this.state.snacks.map(product => (
 
-                        <SnackItem quantity={product.quanity} key={product.id} image={product.image} price={product.price} name={product.name} />
+                        <SnackItem quantity={product.quantity} key={product.id} image={product.image} price={product.price} name={product.name} />
 
                   ) )};
                  

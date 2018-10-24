@@ -6,7 +6,7 @@ const SnackItem = (props) => (
         <ul>
           
            <li>Price : {props.price}</li>
-           <li><img src={"./assets/" + props.image}></img></li>
+           <li><img src={"./assets/images/" + props.image}></img></li>
            <li>Quantity : {props.quantity}</li>
            <li><button>Add to Cart</button></li>
         </ul>

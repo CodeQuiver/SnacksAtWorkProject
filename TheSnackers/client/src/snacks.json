@@ -4,32 +4,32 @@
       "name": "Giraffe Cookies",
       "price": 3.99,
       "currency": "USD",
-      "image": "images/gir.jpg",
-      "quanity": 20
+      "image": "gir.jpg",
+      "quantity": 20
     },
     {
       "id": 2,
       "name": "Donuts",
       "price": 6.99,
       "currency": "USD",
-      "image": "images/donuts.jpg",
-      "quanity": 6
+      "image": "donuts.jpg",
+      "quantity": 6
     },
     {
       "id": 3,
       "name": "Monkey Cookies",
       "price": 5.99,
       "currency": "USD",
-      "image": "images/monkey.jpg",
-      "quanity": 25
+      "image": "monkey.jpg",
+      "quantity": 25
     },
     {
       "id": 4,
       "name": "Tiramisu Cake",
       "price": 5.99,
       "currency": "USD",
-      "image": "images/tir.jpg",
-      "quanity": 3
+      "image": "tir.jpg",
+      "quantity": 3
   
     },
     {
@@ -37,48 +37,48 @@
       "name": "Kettle Chips",
       "price": 2.99,
       "currency": "USD",
-      "image": "images/salt.jpg",
-      "quanity": 13
+      "image": "salt.jpg",
+      "quantity": 13
     },
     {
       "id": 6,
       "name": "Veggie Chips",
       "price": 2.99,
       "currency": "USD",
-      "image": "images/veg.jpg",
-      "quanity": 17
+      "image": "veg.jpg",
+      "quantity": 17
     },
     {
       "id": 7,
       "name": "Trailmix",
       "price": 16.0,
       "currency": "USD",
-      "image": "images/mixes.jpg",
-      "quanity": 20
+      "image": "mixes.jpg",
+      "quantity": 20
     },
     {
       "id": 8,
       "name": "Honey Toast",
       "price": 14.0,
       "currency": "USD",
-      "image": "images/honeytoast.jpg",
-      "quanity": 20
+      "image": "honeytoast.jpg",
+      "quantity": 20
     },
     {
       "id": 9,
       "name": "Chocolate Strawberries",
       "price": 15.0,
       "currency": "USD",
-      "image": "images/choc.jpg",
-      "quanity": 15
+      "image": "choc.jpg",
+      "quantity": 15
     },
   {
     "id": 10,
     "name": "Dry Mango",
     "price": 12.0,
     "currency": "USD",
-    "image": "images/dry.jpg",
-    "quanity": 15
+    "image": "dry.jpg",
+    "quantity": 15
   },
   
   {
@@ -86,8 +86,8 @@
     "name": "Pineapple Cookie",
     "price": 12.0,
     "currency": "USD",
-    "image": "images/pineapple.jpg'",
-    "quanity": 15
+    "image": "pineapple.jpg'",
+    "quantity": 15
   },
   
   {
@@ -95,8 +95,8 @@
     "name": "Puffs",
     "price": 5,
     "currency": "USD",
-    "image": "images/puffs.JPG",
-    "quanity": 15
+    "image": "puffs.JPG",
+    "quantity": 15
   },
   
   {
@@ -104,48 +104,48 @@
     "name": "Short Bread Cookies",
     "price": 5,
     "currency": "USD",
-    "image": "images/short.jpg",
-    "quanity": 16
+    "image": "short.jpg",
+    "quantity": 16
   },
   {
     "id": 14,
     "name": "Macaronss",
     "price": 2.99,
     "currency": "USD",
-    "image": "images/Macarons.jpg",
-    "quanity": 16
+    "image": "Macarons.jpg",
+    "quantity": 16
   },
   {
     "id": 15,
     "name": "Gogi Berries",
     "price": 7.99,
     "currency": "USD",
-    "image": "images/gogi.jpg",
-    "quanity": 16
+    "image": "gogi.jpg",
+    "quantity": 16
   },
   {
     "id": 16,
     "name": "Durian Pancake",
     "price": 9.99,
     "currency": "USD",
-    "image": "images/durian.jpg",
-    "quanity": 16
+    "image": "durian.jpg",
+    "quantity": 16
   },
   {
     "id": 17,
     "name": "Chocolate Chip Cookies",
     "price": 3.99,
     "currency": "USD",
-    "image": "images/cookies.jpg",
-    "quanity": 16
+    "image": "cookies.jpg",
+    "quantity": 16
   },
   {
     "id": 18,
     "name": "Mango Bingsoo",
     "price": 8.99,
     "currency": "USD",
-    "image": "images/bing.jpg",
-    "quanity": 6
+    "image": "bing.jpg",
+    "quantity": 6
     
    }
     ]

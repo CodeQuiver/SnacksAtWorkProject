@@ -1,5 +1,6 @@
 import React from "react";
 import "./ShoppingCart.css";
+import "../../../utils/API.js";
 import "../../../materialize.css";
 
 /*FILE DESCRIPTION
@@ -44,8 +45,17 @@ class SnackItem extends React.Component {
       return (
         <tr className="SnackItem row">
             <td className="col s5">
-                <img className="responsive-img" src="./assets/images/donuts.jpg" alt="donut" />
-                Donut
+                <div className="row">
+                    <div className="col" width="auto">
+                        <img className="responsive-img" src={"./assets/images/" + this.props.image} alt={this.props.name} />
+                    </div>
+
+                    <div className="col">
+                        {this.props.name}
+                    </div>
+                </div>
+                
+                
             </td>
             <td className="col s2">
                 <input type="number" name="itemCount" value={this.props.quantity} />
@@ -58,6 +68,7 @@ class SnackItem extends React.Component {
                 {/* toFixed forces display as string with 2 decimal places, ensuring the $0.00 format */}
             </td>
             <td className="col s1">
+                {/* TODO- make this button remove the entry from display and from state */}
                 <button>X</button>
             </td>
         </tr>
@@ -80,22 +91,34 @@ class ShoppingCart extends React.Component {
 
         this.state = {
             cartItems:[
-                {
+                {   
+                    id: 9,
+                    name: "Chocolate Strawberries",
+                    image: "choc.jpg",
                     quantity: 2,
                     unitPrice: 2.50,
                     calcPrice: null
                 },
                 {
+                    id: 9,
+                    name: "Chocolate Strawberries",
+                    image: "choc.jpg",
                     quantity: 3,
                     unitPrice: 4.00,
                     calcPrice: null
                 },
                 {
+                    id: 9,
+                    name: "Chocolate Strawberries",
+                    image: "choc.jpg",
                     quantity: 1,
                     unitPrice: 3.25,
                     calcPrice: null
                 },
                 {
+                    id: 9,
+                    name: "Chocolate Strawberries",
+                    image: "choc.jpg",
                     quantity: 5,
                     unitPrice: 4.50,
                     calcPrice: null
@@ -136,8 +159,14 @@ class ShoppingCart extends React.Component {
     //function to render each line item
     renderItem = (i) => {
 
-        return <SnackItem quantity={this.state.cartItems[i].quantity} unitPrice={this.state.cartItems[i].unitPrice} 
-        calcPrice={this.state.cartItems[i].calcPrice} id={i} key={i} />;
+        return <SnackItem 
+        name={this.state.cartItems[i].name}
+        image={this.state.cartItems[i].image} 
+        quantity={this.state.cartItems[i].quantity}
+        unitPrice={this.state.cartItems[i].unitPrice} 
+        calcPrice={this.state.cartItems[i].calcPrice} 
+        id={this.state.cartItems[i].id} key={i}
+        />;
     }
 
     render() {
