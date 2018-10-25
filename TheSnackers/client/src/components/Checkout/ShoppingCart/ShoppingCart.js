@@ -128,32 +128,14 @@ class ShoppingCart extends React.Component {
             subtotalPrice: 0,
             finalTotalPrice: 0
         }
-        const TAX_PERCENT = 0.06; //constant value TAX_PERCENT holds sales tax rate as an integer for use in later calculations
-        //Using Sales tax for northern Virginia area of 6%, our hypothetical business is located here
-
-
-        //calcPriceHandler helper function - gives quantity * price result for each line 
-        const calcPriceHandler = (localPrice, localQuant) => {
-            let localTotalPrice;
-            // convert decimals to integers (*100) to avoid imprecise float calculations
-            localPrice = localPrice * 100;
-            // multiply unit price by quantity
-            localTotalPrice = localPrice * localQuant;
-            // convert back to decimals (/100)
-            localTotalPrice = localTotalPrice / 100;
-            return localTotalPrice;
-        }
-        //END calcPriceHandler helper function
-
 
         // LINE PRICE (calcPrice) calculation
         //calculate and store total price (calcPrice) for each item in state
         for (let i = 0; i < this.state.cartItems.length; i++) {
             const item = this.state.cartItems[i];
-            item.calcPrice = calcPriceHandler(item.unitPrice, item.quantity);
+            item.calcPrice = this.calcPriceHandler(item.unitPrice, item.quantity);
         }
         // END LINE PRICE (calcPrice) calculation
-
 
         // SUBTOTAL Calculation
         let newSubTotal = this.state.cartItems.reduce(
@@ -172,11 +154,8 @@ class ShoppingCart extends React.Component {
             // console.log("new subtotal state value: " + this.state.subtotalPrice);
         // END SUBTOTAL Calculation
 
-
-
         //TOTAL ORDER PRICE Calculation
-        
-        this.state.finalTotalPrice = this.state.subtotalPrice + (TAX_PERCENT * this.state.subtotalPrice); //version not trying to avoid floats- gave up as it introduced too many new errors
+        this.state.finalTotalPrice = this.state.subtotalPrice + (this.TAX_PERCENT * this.state.subtotalPrice); //version not trying to avoid floats- gave up as it introduced too many new errors
 
         // convert each value to an integer, then divide by 1,000 as equivalent to dividing by 100 twice
             // this returns the original values to correct decimals and also divides the final value by 100 to finish the percentage calculation
@@ -193,6 +172,26 @@ class ShoppingCart extends React.Component {
         // END TOTAL ORDER PRICE Calculation
 
     }
+    //END constructor
+
+    TAX_PERCENT = 0.06; //constant value TAX_PERCENT holds sales tax rate as an integer for use in later calculations
+    //Using Sales tax for northern Virginia area of 6%, our hypothetical business is located here
+
+
+    //calcPriceHandler helper function - gives quantity * price result for each line 
+    calcPriceHandler = (localPrice, localQuant) => {
+        let localTotalPrice;
+        // convert decimals to integers (*100) to avoid imprecise float calculations
+        localPrice = localPrice * 100;
+        // multiply unit price by quantity
+        localTotalPrice = localPrice * localQuant;
+        // convert back to decimals (/100)
+        localTotalPrice = localTotalPrice / 100;
+        return localTotalPrice;
+    }
+    //END calcPriceHandler helper function
+
+
 
     // RENDER LINE ITEM
     // function to render the listing for each snack being ordered
@@ -253,8 +252,7 @@ class ShoppingCart extends React.Component {
                     <div className="col">
                     Subtotal: {this.state.subtotalPrice.toFixed(2)} <br />
                         Tax: 6%<br />
-                        {/* Tax: {TAX_PERCENT}%<br /> */}
-                        {/* TODO- Solve "undefined" error where this can't read the simple TAX_PERCENT constant*/}
+                        Tax: {this.TAX_PERCENT * 100}%<br />
                         Delivery: FREE!
                     </div>
 
