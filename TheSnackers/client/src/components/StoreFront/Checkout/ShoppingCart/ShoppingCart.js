@@ -1,7 +1,7 @@
 import React from "react";
 import "./ShoppingCart.css";
-import "../../../utils/API.js";
-import "../../../materialize.css";
+import "../../../../utils/API";
+import "../../../../materialize.css";
 
 /*FILE DESCRIPTION
 This file contains the Shopping Cart module.
@@ -235,6 +235,7 @@ class ShoppingCart extends React.Component {
                     </tr>
                     <tbody>
                         {/* Each row will be a "dumb component" item listing, receiving props from ShoppingCart */}
+                        {/* TODO- update this section to map/loop through all items in the cart array instead of being hard-coded with the indexes */}
 
                         {this.renderItem(0)}
                         {this.renderItem(1)}
@@ -251,7 +252,6 @@ class ShoppingCart extends React.Component {
                     <div className="col"></div>
                     <div className="col">
                     Subtotal: {this.state.subtotalPrice.toFixed(2)} <br />
-                        Tax: 6%<br />
                         Tax: {this.TAX_PERCENT * 100}%<br />
                         Delivery: FREE!
                     </div>

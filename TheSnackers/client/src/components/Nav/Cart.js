@@ -1,5 +1,5 @@
 import React from "react";
-import Checkout from "../Checkout/Checkout.js";
+import Checkout from "../StoreFront/Checkout/Checkout.js";
 
 const Cart = () => (
     <div>

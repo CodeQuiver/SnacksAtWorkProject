@@ -1,6 +1,8 @@
 import React from "react";
-import "../../materialize.css";
+import "../../../materialize.css";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.js";
+// import Delivery from "./Delivery/Delivery.js";
+// import Billing from "./Billing/Billing.js";
 
 /*FILE DESCRIPTION
 This file contains the Checkout module.
@@ -18,6 +20,8 @@ Checkout will:
 
     3) track all data from the sub-modules in its state to be sent upon order submission
         - for now these are being coded stand-alone, but will update to have them managed at this level later
+    
+    //this or a higher-level module will add any item from the storefront to the state.cartItems array when "add to cart" is clicked
 
 */
 
@@ -27,7 +31,9 @@ class Checkout extends React.Component {
             <div className = "Checkout">
                 <ShoppingCart />
                 {/* TODO- add Delivery form component here */}
+                {/* <Delivery /> */}
                 {/* TODO- add Billing form component here */}
+                {/* <Billing /> */}
             </div>
         );
     }

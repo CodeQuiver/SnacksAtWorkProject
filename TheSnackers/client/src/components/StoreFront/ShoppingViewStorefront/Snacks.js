@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import SnackItem from "./SnackItem";
-import API from "../../utils/API";
-import snacks from "../../snacks.json";
+import API from "../../../utils/API";
+import snacks from "../../../snacks.json";
 
 
 class Snacks extends Component {
@@ -22,11 +22,11 @@ class Snacks extends Component {
     render() {
       return (
         <div>
-                  {this.state.snacks.map(product => (
+          {this.state.snacks.map(product => (
 
-                        <SnackItem quantity={product.quantity} key={product.id} image={product.image} price={product.price} name={product.name} />
+            <SnackItem quantity={product.quantity} key={product.id} image={product.image} price={product.price} name={product.name} />
 
-                  ) )};
+          ) )};
                  
        </div>
       );

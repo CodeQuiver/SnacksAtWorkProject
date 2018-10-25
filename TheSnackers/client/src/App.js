@@ -4,7 +4,7 @@ import NavigationTabs from "./components/NavigationTabs";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Home from "./components/Nav/Home";
 import About from "./components/Nav/About";
-import Snacks from "./components/Nav/Snacks";
+import Snacks from "./components/StoreFront/ShoppingViewStorefront/Snacks";
 import Cart from "./components/Nav/Cart";
 import ProductList from "./components/ProductList";
 
