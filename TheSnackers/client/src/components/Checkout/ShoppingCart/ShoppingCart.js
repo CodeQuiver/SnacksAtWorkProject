@@ -28,7 +28,8 @@ Features:
 
     3) store in state (for now)
         a. array of items in cart, including: id, name, quantity
-        b. final order total
+        b. order subtotal
+        c. final order total
 
 TODO- once this module is complete, modify so Checkout page will manage the state of the order (lift cart's state up)
 
@@ -86,9 +87,7 @@ class ShoppingCart extends React.Component {
     //constructor builds state, state includes list of selected items from database
     constructor(props) {
         super(props);
-        const TAX = 0.10; //constant value TAX holds tax for use in later calculations
-        //TODO- look up sales tax for Virginia to enter here, using 10% for development
-
+        
         this.state = {
             cartItems:[
                 {   
@@ -129,6 +128,9 @@ class ShoppingCart extends React.Component {
             subtotalPrice: 0,
             finalTotalPrice: 0
         }
+        const TAX_PERCENT = 0.06; //constant value TAX_PERCENT holds sales tax rate as an integer for use in later calculations
+        //Using Sales tax for northern Virginia area of 6%, our hypothetical business is located here
+
 
         //calcPriceHandler helper function - gives quantity * price result for each line 
         const calcPriceHandler = (localPrice, localQuant) => {
@@ -143,29 +145,57 @@ class ShoppingCart extends React.Component {
         }
         //END calcPriceHandler helper function
 
-        //use function to calculate and store total price (calcPrice) for each array item in state
+
+        // LINE PRICE (calcPrice) calculation
+        //calculate and store total price (calcPrice) for each item in state
         for (let i = 0; i < this.state.cartItems.length; i++) {
             const item = this.state.cartItems[i];
             item.calcPrice = calcPriceHandler(item.unitPrice, item.quantity);
         }
+        // END LINE PRICE (calcPrice) calculation
 
-        // this.state.subtotalPrice = reduce()//use reduce to add all calcPrice values in array together
+
+        // SUBTOTAL Calculation
         let newSubTotal = this.state.cartItems.reduce(
             function (accumulator, item) {
-                return accumulator + item.calcPrice;
+                // convert decimals to integers (*100) to avoid imprecise float calculations
+                let localPrice = item.calcPrice * 100;
+                // add to accumulator
+                let localTotalPrice = accumulator + localPrice;
+
+                return localTotalPrice;
             }, 0);
+            // console.log("newSubTotal: " + newSubTotal);
 
-        console.log(newSubTotal);
+        this.state.subtotalPrice = newSubTotal / 100; //convert total back to decimals by dividing again by 100 before updating state value
 
-        this.state.subtotalPrice = newSubTotal;
+            // console.log("new subtotal state value: " + this.state.subtotalPrice);
+        // END SUBTOTAL Calculation
 
-        // this.state.finalTotalPrice = subtotalPrice + (tax * subtotalprice)        
 
+
+        //TOTAL ORDER PRICE Calculation
+        
+        this.state.finalTotalPrice = this.state.subtotalPrice + (TAX_PERCENT * this.state.subtotalPrice); //version not trying to avoid floats- gave up as it introduced too many new errors
+
+        // convert each value to an integer, then divide by 1,000 as equivalent to dividing by 100 twice
+            // this returns the original values to correct decimals and also divides the final value by 100 to finish the percentage calculation
+        // console.log("Subtotal before tax: " + this.state.subtotalPrice);        
+        
+        // let taxCalcVar = (TAX_PERCENT * (this.state.subtotalPrice * 100) ) / 100;
+        // taxCalcVar = (this.state.subtotalPrice * 100) + (taxCalcVar * 100);
+        // taxCalcVar = taxCalcVar / 100;
+        // this.state.finalTotalPrice = taxCalcVar;
+
+        // console.log("Total with tax: " + taxCalcVar);
+        
+
+        // END TOTAL ORDER PRICE Calculation
 
     }
 
-
-    //function to render each line item
+    // RENDER LINE ITEM
+    // function to render the listing for each snack being ordered
     renderItem = (i) => {
 
         return <SnackItem 
@@ -177,14 +207,17 @@ class ShoppingCart extends React.Component {
         id={this.state.cartItems[i].id} key={i}
         />;
     }
+    // END RENDER LINE ITEM
 
+
+    // MAIN ShoppingCart RENDER SECTION
     render() {
         return (
     
             <div className="ShoppingCart">
                 <h3 className="page-header">Your Order:</h3>
                 <table className="highlight">
-                    <thead className="row">
+                    <tr className="row">
                         <th className="col s5 cart-header">
                             Snack
                         </th>
@@ -200,26 +233,40 @@ class ShoppingCart extends React.Component {
                         <th className="col s1 cart-header">
                             {/* blank because above cart remove button column */}
                         </th>
-                    </thead>
+                    </tr>
                     <tbody>
                         {/* Each row will be a "dumb component" item listing, receiving props from ShoppingCart */}
-                        {/* <SnackItem quantity={this.state.cartItems[0].quantity} 
-                        unitPrice={this.state.cartItems[0].unitPrice} 
-                        calcPrice={this.calcPriceHandler(this.state.cartItems[0].unitPrice)} /> */}
+
                         {this.renderItem(0)}
                         {this.renderItem(1)}
                         {this.renderItem(2)}
                         {this.renderItem(3)}
 
-                        {/* <SnackItem quantity={this.state.cartItems[1].quantity} unitPrice={this.state.cartItems[1].unitPrice} /> */}
-                        {/* <SnackItem quantity={this.state.cartItems[2].quantity} unitPrice={this.state.cartItems[2].unitPrice} /> */}
-                        {/* <SnackItem quantity={this.state.cartItems[3].quantity} unitPrice={this.state.cartItems[3].unitPrice} /> */}
                     </tbody>
 
                 </table>
+
+                <div className="row">
+                    <div className="col"></div>
+                    <div className="col"></div>
+                    <div className="col"></div>
+                    <div className="col">
+                    Subtotal: {this.state.subtotalPrice.toFixed(2)} <br />
+                        Tax: 6%<br />
+                        {/* Tax: {TAX_PERCENT}%<br /> */}
+                        {/* TODO- Solve "undefined" error where this can't read the simple TAX_PERCENT constant*/}
+                        Delivery: FREE!
+                    </div>
+
+                    <div className="col">
+                        <h5>Total: {this.state.finalTotalPrice.toFixed(2)}</h5>
+                    </div>
+                </div>
             </div>
         );
     }
+    // END MAIN ShoppingCart RENDER SECTION
+
 }
 
 export default ShoppingCart;
