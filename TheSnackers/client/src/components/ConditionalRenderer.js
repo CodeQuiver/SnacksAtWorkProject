@@ -10,7 +10,8 @@ import NavigationTabs from "./NavigationTabs";
 class ConditionalRenderer extends Component{
 
     state ={
-        currentPage : "Home"
+        currentPage : "Home",
+        shoppingCartHack : [] // #imsorrybrah #futuremewillmakeabettersolution
     };
 
     handlePageChange = page => {
