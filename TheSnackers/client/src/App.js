@@ -46,12 +46,12 @@ const App = () => {
 <Router>
 <div>
   <NavigationTabs/>
-      <switch>
+      <div className="switch">
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={About} /> 
       <Route exact path="/snacks" component={Snacks} />
       <Route exact path="/cart" component={Cart} />
-      </switch >
+      </div>
 </div>
 
 

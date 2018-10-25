@@ -59,7 +59,7 @@ class SnackItem extends React.Component {
                 
             </td>
             <td className="col s2">
-                <input type="number" name="itemCount" value={this.props.quantity} />
+                <input type="number" name="itemCount" defaultValue={this.props.quantity} />
             </td>
             <td className="col s2"> 
                 ${this.props.unitPrice.toFixed(2)}
@@ -76,31 +76,7 @@ class SnackItem extends React.Component {
       );
     }
   }
-//END SnackItem
-
-// LIST
-// function to render the listing for each snack being ordered
-class List extends React.Component {
-    render() {
-        return (
-            this.props.cartItems.map(
-                item => {
-                    return         
-                    <SnackItem 
-                    name={item.name}
-                    image={item.image} 
-                    quantity={item.quantity}
-                    unitPrice={item.unitPrice} 
-                    calcPrice={item.calcPrice} 
-                    id={item.id} key={item.id}
-                    />;
-                }
-            )
-        );
-    }   
-}
-
-// END LIST
+//END SnackItem 
 
 
 //Shopping Cart
@@ -216,37 +192,77 @@ class ShoppingCart extends React.Component {
     //END calcPriceHandler helper function
 
 
+
+    // RENDER LINE ITEM
+    // function to render the listing for each snack being ordered
+    // renderItem = (array, i) => {
+
+    //     // return <SnackItem 
+    //     // name={array[i].name}
+    //     // image={array[i].image} 
+    //     // quantity={array[i].quantity}
+    //     // unitPrice={array[i].unitPrice} 
+    //     // calcPrice={array[i].calcPrice} 
+    //     // id={array[i].id} key={i}
+    //     // />;
+    // }
+    // END RENDER LINE ITEM
+
+    //RENDER ALL ITEMS
+    renderAllItems = () => {
+
+        for (let i = 0; i < this.state.cartItems.length; i++) {
+            const item = this.state.cartItems[i];
+
+            return <SnackItem 
+            name={item.name}
+            image={item.image} 
+            quantity={item.quantity}
+            unitPrice={item.unitPrice} 
+            calcPrice={item.calcPrice} 
+            id={item.id} key={i}
+            />
+        }
+        
+    }
+    //END RENDER ALL ITEMS
+
+
     // MAIN ShoppingCart RENDER SECTION
     render() {
         return (
     
             <div className="ShoppingCart">
                 <h3 className="page-header">Your Order:</h3>
-                <
-                    table className="highlight">
-                    <tr className="row">
-                        <th className="col s5 cart-header">
-                            Snack
-                        </th>
-                        <th className="col s2 cart-header">
-                            Quantity
-                        </th>
-                        <th className="col s2 cart-header">
-                            x Price for Each =
-                        </th>
-                        <th className="col s2 cart-header">
-                            Total
-                        </th>
-                        <th className="col s1 cart-header">
-                            {/* blank because above cart remove button column */}
-                        </th>
-                    </tr>
+                <table className="highlight">
                     <tbody>
+                        <tr className="row">
+                            <th className="col s5 cart-header">
+                                Snack
+                            </th>
+                            <th className="col s2 cart-header">
+                                Quantity
+                            </th>
+                            <th className="col s2 cart-header">
+                                x Price for Each =
+                            </th>
+                            <th className="col s2 cart-header">
+                                Total
+                            </th>
+                            <th className="col s1 cart-header">
+                                {/* blank because above cart remove button column */}
+                            </th>
+                        </tr>
+                    
                         {/* Each row will be a "dumb component" item listing, receiving props from ShoppingCart */}
                         {/* TODO- update this section to map/loop through all items in the cart array instead of being hard-coded with the indexes */}
 
-                        {/* {this.renderItems(this.state)} */}
-                        <List cartItems = {this.state.cartItems} />
+                        {/* {this.renderItem(0)}
+                        {this.renderItem(1)}
+                        {this.renderItem(2)}
+                        {this.renderItem(3)} */}
+
+                        {this.renderAllItems()}
 
                     </tbody>
 
