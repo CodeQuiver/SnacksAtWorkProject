@@ -214,14 +214,12 @@ class ShoppingCart extends React.Component {
         for (let i = 0; i < this.state.cartItems.length; i++) {
             const item = this.state.cartItems[i];
 
-            return <SnackItem 
-            name={item.name}
+            return <SnackItem name={item.name}
             image={item.image} 
             quantity={item.quantity}
             unitPrice={item.unitPrice} 
             calcPrice={item.calcPrice} 
-            id={item.id} key={i}
-            />
+            id={item.id} key={i} />
         }
         
     }
