@@ -9,19 +9,26 @@ import NavigationTabs from "./NavigationTabs";
 
 class ConditionalRenderer extends Component{
 
-    state ={
+    state = {
+        previousPage: "Home",
         currentPage : "Home",
-        shoppingCartHack : [] // #imsorrybrah #futuremewillmakeabettersolution
+        shoppingCartHack : [], // #imsorrybrah #futuremewillmakeabettersolution
+        dataForPageChange: {}  // #imsorrybrah #futuremewillmakeabettersolution
     };
 
     handlePageChange = page => {
-
+        //alert("handlepagechange");
+        this.setState ( {previousPage: this.state.currentPage} );
         this.setState ( {currentPage : page});
     };
 
+    testfunc() {
+        console.log("ConditionalRenderer.testfunc");
+    }
+
     renderPage = () =>
     {
-
+        {console.log("ConditionalRenderer.renderPage");}
         if(this.state.currentPage == "Home")
         {
             return <Home/>
@@ -36,6 +43,10 @@ class ConditionalRenderer extends Component{
         }
         else 
         {
+            /*{console.log("ConditionalRender.renderPage: Rendering Cart");
+            console.log("ConditionalRender.renderPage: previousPage, currentPage = "
+                 + this.state.previousPage.toString() 
+                 + this.state.currentPage.toString());}*/
             return <Cart />
         }
 

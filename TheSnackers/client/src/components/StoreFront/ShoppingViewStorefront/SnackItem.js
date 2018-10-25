@@ -1,14 +1,15 @@
 import React from "react"
 
+
 const SnackItem = (props) => (
     <div>
-        <h1 className="page-header">{props.name}</h1>
+        <h4 className="page-header">{props.name}</h4>
         <ul>
-          
+           
            <li>Price : {props.price}</li>
-           <li><img src={"./assets/images/" + props.image}></img></li>
+           <li><img width="150px" height="auto" src={"./assets/images/" + props.image}></img></li>
            <li>Quantity : {props.quantity}</li>
-           <li><button>Add to Cart</button></li>
+           <li><button id={props.id} onClick = {() => { props.addToCartFunc(props.id); } }>Add to Cart</button></li>
         </ul>
     </div>
 

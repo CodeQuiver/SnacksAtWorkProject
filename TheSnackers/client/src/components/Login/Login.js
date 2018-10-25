@@ -1,11 +1,29 @@
 
  import React from "react"
  import "../forms.css";
+ import "../../materialize.css";
 
 
- //login
+	 const formValid = ({ formErrors, ...rest }) => {
+    	let valid = true;
+  
+    // validate form errors being empty
+    Object.values(formErrors).forEach(val => {
+      val.length > 0 && (valid = false);
+    });
+  
+    // validate the form was filled out
+    Object.values(rest).forEach(val => {
+      val === null && (valid = false);
+    });
+  
+    return valid;
+  };
+	
+		
 
-class Login extends React.Component {
+ 	//login
+	class Login extends React.Component {
 
 		constructor(props) {
 		//Call the parent by passing in the super
@@ -16,32 +34,13 @@ class Login extends React.Component {
 			 formErrors: {
 				 email: "",
 				 password: ""
-			 }
-         };	
-         
-
-          
-            //FormValid Function
-            const formValid = ({ formErrors, ...rest }) => {
-                 console.log("what is the problem");
-	         let valid = true;
-  
-	        // validate form errors being empty
-	        Object.values(formErrors).forEach(val => {
-	            val.length > 0 && (valid = false);
-	        });
-  
-	        // validate the form was filled out
-	        Object.values(rest).forEach(val => {
-	            val === null && (valid = false);
-	        });
-  
-	        return valid;
-    };
-
-    }
-
-
+			 },
+			
+		 };	
+		}
+		 
+    	//=======VALIDATION======================================================================    
+        
 	 	handleSubmit = (event, validationCallBack) =>{
 			 //Prevents form from submitting by itself
 			 event.preventDefault();
@@ -58,6 +57,7 @@ class Login extends React.Component {
          
 		 handleChange = (event) =>{
 			 event.preventDefault();
+			 //Regular expression for the correct format of an email
 			 const emailRegex = RegExp(
 				/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 			  );	
@@ -81,13 +81,13 @@ class Login extends React.Component {
 
 			 this.setState({ formErrors, [name]: value }, () => console.log(this.state));
 		 };
-
+		 
+		 //======VALIDATION==================================================================================
 	 
 
-
-
- 	render() {
-		const { formErrors } = this.state;
+		//========FORM=======================================================================================
+ 		render() {
+			const { formErrors } = this.state;
 
  		return  (
  			<div id="login" className="col s12">
@@ -98,7 +98,7 @@ class Login extends React.Component {
 						 	{/* Enter in E-mail */}
  							<div className="input-field col s12">
 							 <label htmlFor="email">E-mail</label>
-							  <input className={formErrors.email.length > 0 ? "error" : null} //makes the field red when there is an error
+							  <input className={formErrors.email.length > 0 ? "error" : null} 
 									 type="email" 
 									 name="email"
 									 noValidate
@@ -127,22 +127,22 @@ class Login extends React.Component {
  						<br/>
                          <button className="btn waves-effect waves-light" type="submit" name="action">Sign In</button>
 						 <br/>
-						 <br/> 
-                         <button className="btn waves-effect waves-light" type="submit" name="action">Register</button>
+						 <br/>
+						 <button className="btn waves-effect waves-light" type="submit" name="action">Sign Up</button>
+
 						</div>
 					</div>
  				</form>
- 			</div>			
+			 </div>		
  		);
-	 }	 
-
- };
-
- export default Login;
-
-
+	 };	 
+	}
  
 
+
+ //=========FORM===============================================================================================================
+
+ export default Login;
 
 
 

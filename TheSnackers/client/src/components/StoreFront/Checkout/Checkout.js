@@ -1,8 +1,8 @@
 import React from "react";
 import "../../../materialize.css";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.js";
-// import Delivery from "./Delivery/Delivery.js";
-// import Billing from "./Billing/Billing.js";
+import Delivery from "./Delivery/Delivery.js";
+import Billing from "./Billing/Billing.js";
 
 /*FILE DESCRIPTION
 This file contains the Checkout module.
@@ -29,11 +29,11 @@ class Checkout extends React.Component {
     render() {
         return (
             <div className = "Checkout">
-                <ShoppingCart />
+                <ShoppingCart  />
                 {/* TODO- add Delivery form component here */}
-                {/* <Delivery /> */}
+                <Delivery />
                 {/* TODO- add Billing form component here */}
-                {/* <Billing /> */}
+                <Billing />
             </div>
         );
     }

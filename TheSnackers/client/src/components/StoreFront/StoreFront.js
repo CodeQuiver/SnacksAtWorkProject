@@ -1,5 +1,6 @@
 import React from "react";
 import Checkout from "./Checkout/Checkout.js";
+import "../../materialize.css";
 
 class StoreFront extends React.Component {
     render() {

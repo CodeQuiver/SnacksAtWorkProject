@@ -1,7 +1,7 @@
 import React from "react";
 //npm i jquery --save - install jquery and import
 import $ from 'jquery'; 
-import "../../forms.css";
+import "../../../forms.css";
 
 //The Billing form
 class Billing extends React.Component {

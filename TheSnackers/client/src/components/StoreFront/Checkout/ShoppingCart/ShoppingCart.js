@@ -2,6 +2,9 @@ import React from "react";
 import "./ShoppingCart.css";
 import "../../../../utils/API";
 import "../../../../materialize.css";
+import globdata from "../../../globdata";
+import API from "../../../../utils/API";
+import snacks from "../../../../snacks.json"
 
 /*FILE DESCRIPTION
 This file contains the Shopping Cart module.
@@ -36,6 +39,18 @@ TODO- once this module is complete, modify so Checkout page will manage the stat
 TODO- research sessions so cart data persists
 
 */
+
+
+function RenderASnack(item1) {
+    console.log("RenderASnack - Begin");
+    var item = item1.value;
+    return (<SnackItem name={item.name}
+    image={item.image} 
+    quantity={item.quantity}
+    unitPrice={item.unitPrice} 
+    calcPrice={item.calcPrice} 
+    id={item.id} key={ "SnackItem_" + item.id.toString()} />);
+};
 
 
 //SnackItem 
@@ -83,13 +98,50 @@ class SnackItem extends React.Component {
 //assembled component, contains multiple line entries, imports array of selected items as state
 class ShoppingCart extends React.Component {
     
+    formatSnackData(rawSnackInfo){
+        /*
+        Raw snack info looks like this (from snacks.json):
+        {
+            "id": 2,
+            "name": "Donuts",
+            "price": 6.99,
+            "currency": "USD",
+            "image": "donuts.jpg",
+            "quantity": 6 //in stock
+        },
+        We want it to look like this:
+        {
+            id: new_id, 
+            name: "Chocolate Strawberries",
+            image: "choc.jpg",
+            quantity: 1 // assume, customer only wants one of anything until we fix form
+            unitPrice: 4.50,
+            calcPrice: null
+        }
+        */
+        let formattedSnackInfo = {id: rawSnackInfo.id, name: rawSnackInfo.name, image: rawSnackInfo.image,
+            quantity: 1, calcPrice: null, unitPrice: rawSnackInfo.price};
+        return formattedSnackInfo;
+    }
+
+    findSnackById(id) {
+        for (let i = 0; i < snacks.length; i++) {
+            if (snacks[i].id == id) {
+                return this.formatSnackData(snacks[i]);
+            }
+        }
+        console.log("ShoppingCart.findSnackById: Unable to find information for item with id " + id.toString());
+        return null;
+    }
 
     //constructor builds state, state includes list of selected items from database
     constructor(props) {
         super(props);
-        
+        console.log("ShoppingCart.constructor: this is my data: " + JSON.stringify(globdata));
         this.state = {
-            cartItems:[
+            cartItems: [],
+            /*
+            cartItemsOld:[
                 {   
                     id: 9,
                     name: "Chocolate Strawberries",
@@ -124,11 +176,27 @@ class ShoppingCart extends React.Component {
                 }
             
             ],
+            */
+            
             //calculated cart subtotal and total after tax, both initialized as 0
             subtotalPrice: 0,
             finalTotalPrice: 0
         }
 
+        // populate state from global cart data
+        for (let i = 0; i < globdata.cartItems.length; i++) {
+            const new_id = globdata.cartItems[i].id;
+            // query api for the rest of the data of the id
+            //let productData = API.getProduct(new_id);
+            //alert("Product Data: " + JSON.stringify(productData) );
+            let newSnackData = this.findSnackById(new_id);
+            if (null == newSnackData) {
+                continue;
+            }
+            // then add to this.state.cartItems
+            this.state.cartItems.push(newSnackData);
+        }
+        
         // LINE PRICE (calcPrice) calculation
         //calculate and store total price (calcPrice) for each item in state
         for (let i = 0; i < this.state.cartItems.length; i++) {
@@ -208,12 +276,37 @@ class ShoppingCart extends React.Component {
     // }
     // END RENDER LINE ITEM
 
+
+    renderOneSnackItem = (item) => {
+        console.log("renderOneSnackItem " + item.toString());
+        return (<SnackItem name={item.name}
+        image={item.image} 
+        quantity={item.quantity}
+        unitPrice={item.unitPrice} 
+        calcPrice={item.calcPrice} 
+        id={item.id} key={item.id.toString()} />);
+    }
+
     //RENDER ALL ITEMS
     renderAllItems = () => {
+        const listItems = this.state.cartItems.map( (item) => 
+                <RenderASnack key={item.id.toString()} value={item}/>
+        );
+        console.log("renderAllItems: hello again");
+        console.log("renderAllItems: " + listItems.length);
+        if (listItems.length == 0) { 
+            return (<tr><td></td></tr>);
+        }
+        //return this.renderOneSnackItem(this.state.cartItems[0]);
+        return (<tr>{listItems}></tr>);
+    }
 
+
+    //RENDER ALL ITEMS
+    /*renderAllItems = () => {
         for (let i = 0; i < this.state.cartItems.length; i++) {
+            console.log("ShoppingCart.renderAllItems " + i.toString());
             const item = this.state.cartItems[i];
-
             return <SnackItem name={item.name}
             image={item.image} 
             quantity={item.quantity}
@@ -221,8 +314,7 @@ class ShoppingCart extends React.Component {
             calcPrice={item.calcPrice} 
             id={item.id} key={i} />
         }
-        
-    }
+    }*/
     //END RENDER ALL ITEMS
 
 
@@ -259,7 +351,6 @@ class ShoppingCart extends React.Component {
                         {this.renderItem(1)}
                         {this.renderItem(2)}
                         {this.renderItem(3)} */}
-
                         {this.renderAllItems()}
 
                     </tbody>
