@@ -29,7 +29,7 @@ const App = () => {
             <div><Login /> </div>
             <div><Signup /> </div>
 
-            {/* <div><Billing /></div>
+            <div><Billing /></div>
             <div><Delivery /></div> */}
             {/* <div className="row"> */}
                 {/* <div className="col-md-8">

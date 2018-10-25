@@ -3,6 +3,24 @@
  import "../forms.css";
 
 
+ 	const formValid = ({ formErrors, ...rest }) => {
+    	let valid = true;
+  
+    // validate form errors being empty
+    Object.values(formErrors).forEach(val => {
+      val.length > 0 && (valid = false);
+    });
+  
+    // validate the form was filled out
+    Object.values(rest).forEach(val => {
+      val === null && (valid = false);
+    });
+  
+    return valid;
+  };
+	
+		
+
  	//login
 	class Login extends React.Component {
 
@@ -18,29 +36,10 @@
 			 },
 			
 		 };	
+		}
 		 
-         //=======VALIDATION======================================================================    
-            //FormValid Function
-            const formValid = ({ formErrors, ...rest }) => {
-                 console.log("what is the problem");
-	         let valid = true;
-  
-	        // validate form errors being empty
-	        Object.values(formErrors).forEach(val => {
-	            val.length > 0 && (valid = false);
-	        });
-  
-	        // validate the form was filled out
-	        Object.values(rest).forEach(val => {
-	            val === null && (valid = false);
-	        });
-  
-	        return valid;
-    	};
-
-    	}
-
-
+    	//=======VALIDATION======================================================================    
+        
 	 	handleSubmit = (event, validationCallBack) =>{
 			 //Prevents form from submitting by itself
 			 event.preventDefault();
@@ -126,13 +125,19 @@
  						<br/>
  						<br/>
                          <button className="btn waves-effect waves-light" type="submit" name="action">Sign In</button>
+						 <br/>
+						 <br/>
+						 <button className="btn waves-effect waves-light" type="submit" name="action">Sign Up</button>
+
 						</div>
 					</div>
  				</form>
 			 </div>		
  		);
-	 }	 
- };
+	 };	 
+	}
+ 
+
 
  //=========FORM===============================================================================================================
 
