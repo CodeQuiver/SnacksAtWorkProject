@@ -121,7 +121,7 @@ class Signup extends React.Component {
 							</div>
 						 <br/>
 						 <br/> 
-                         <button className="btn waves-effect waves-light" type="submit" name="action">Register</button>
+                         <button className="btn waves-effect waves-light" type="submit" name="action">Sign Up</button>
 						</div>
 					</div>
  				</form>
