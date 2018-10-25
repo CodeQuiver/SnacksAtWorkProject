@@ -7,6 +7,9 @@ import About from "./components/Nav/About";
 import Snacks from "./components/Nav/Snacks";
 import Cart from "./components/Nav/Cart";
 import ProductList from "./components/ProductList";
+import  Login from "./Login/Login.js";
+import Delivery from "./Checkout/Delivery.js";
+import Billing from "./Checkout/Billing.js";
 
 
 // class App extends Component {
@@ -21,6 +24,9 @@ const App = () => {
                     <h1>Welcome to Snacks-2-Go</h1>
                 </div>
             </div>
+            <div><Login /> </div>
+            <div><Billing /></div>
+            <div><Delivery /></div>
             {/* <div className="row"> */}
                 {/* <div className="col-md-8">
                     <ProductList />
