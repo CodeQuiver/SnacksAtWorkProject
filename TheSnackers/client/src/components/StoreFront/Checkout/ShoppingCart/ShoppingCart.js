@@ -76,7 +76,31 @@ class SnackItem extends React.Component {
       );
     }
   }
-//END SnackItem 
+//END SnackItem
+
+// LIST
+// function to render the listing for each snack being ordered
+class List extends React.Component {
+    render() {
+        return (
+            this.props.cartItems.map(
+                item => {
+                    return         
+                    <SnackItem 
+                    name={item.name}
+                    image={item.image} 
+                    quantity={item.quantity}
+                    unitPrice={item.unitPrice} 
+                    calcPrice={item.calcPrice} 
+                    id={item.id} key={item.id}
+                    />;
+                }
+            )
+        );
+    }   
+}
+
+// END LIST
 
 
 //Shopping Cart
@@ -192,30 +216,14 @@ class ShoppingCart extends React.Component {
     //END calcPriceHandler helper function
 
 
-
-    // RENDER LINE ITEM
-    // function to render the listing for each snack being ordered
-    renderItem = (i) => {
-
-        return <SnackItem 
-        name={this.state.cartItems[i].name}
-        image={this.state.cartItems[i].image} 
-        quantity={this.state.cartItems[i].quantity}
-        unitPrice={this.state.cartItems[i].unitPrice} 
-        calcPrice={this.state.cartItems[i].calcPrice} 
-        id={this.state.cartItems[i].id} key={i}
-        />;
-    }
-    // END RENDER LINE ITEM
-
-
     // MAIN ShoppingCart RENDER SECTION
     render() {
         return (
     
             <div className="ShoppingCart">
                 <h3 className="page-header">Your Order:</h3>
-                <table className="highlight">
+                <
+                    table className="highlight">
                     <tr className="row">
                         <th className="col s5 cart-header">
                             Snack
@@ -237,10 +245,8 @@ class ShoppingCart extends React.Component {
                         {/* Each row will be a "dumb component" item listing, receiving props from ShoppingCart */}
                         {/* TODO- update this section to map/loop through all items in the cart array instead of being hard-coded with the indexes */}
 
-                        {this.renderItem(0)}
-                        {this.renderItem(1)}
-                        {this.renderItem(2)}
-                        {this.renderItem(3)}
+                        {/* {this.renderItems(this.state)} */}
+                        <List cartItems = {this.state.cartItems} />
 
                     </tbody>
 
