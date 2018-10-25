@@ -1,10 +1,9 @@
-
- import React from "react"
+import React from "react"
  import "../forms.css";
 
 
- 	//login
-	class Login extends React.Component {
+ //Signup
+class Signup extends React.Component {
 
 		constructor(props) {
 		//Call the parent by passing in the super
@@ -19,7 +18,7 @@
 			
 		 };	
 		 
-         //=======VALIDATION======================================================================    
+         //=====VALIDATION=============================================================================         
             //FormValid Function
             const formValid = ({ formErrors, ...rest }) => {
                  console.log("what is the problem");
@@ -36,10 +35,9 @@
 	        });
   
 	        return valid;
-    	};
+        };
 
-    	}
-
+        }
 
 	 	handleSubmit = (event, validationCallBack) =>{
 			 //Prevents form from submitting by itself
@@ -57,7 +55,6 @@
          
 		 handleChange = (event) =>{
 			 event.preventDefault();
-			 //Regular expression for the correct format of an email
 			 const emailRegex = RegExp(
 				/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 			  );	
@@ -81,19 +78,18 @@
 
 			 this.setState({ formErrors, [name]: value }, () => console.log(this.state));
 		 };
-		 
-		 //======VALIDATION==================================================================================
+    //==========VALIDATION=============================================================================
 	 
 
-		//========FORM=======================================================================================
- 		render() {
-			const { formErrors } = this.state;
+    //======FORM========================================================================================
+ 	render() {
+		const { formErrors } = this.state;
 
  		return  (
  			<div id="login" className="col s12">
  				<form onSubmit={() => this.handleSubmit(this.formValid)} noValidate>
  					<div className="form-container">
- 						<h3 className="teal-text">LOGIN</h3>
+ 						<h3 className="teal-text">SIGNUP</h3>
  						<div className="row"> 
 						 	{/* Enter in E-mail */}
  							<div className="input-field col s12">
@@ -123,9 +119,9 @@
                				 <span className="errorMessage">{formErrors.password}</span>
               				 )}
 							</div>
- 						<br/>
- 						<br/>
-                         <button className="btn waves-effect waves-light" type="submit" name="action">Sign In</button>
+						 <br/>
+						 <br/> 
+                         <button className="btn waves-effect waves-light" type="submit" name="action">Register</button>
 						</div>
 					</div>
  				</form>
@@ -133,17 +129,6 @@
  		);
 	 }	 
  };
-
- //=========FORM===============================================================================================================
-
- export default Login;
-
-
+//=======FORM===================================================================================================================
  
-
-
-
-
-
-
-
+export default Signup;
