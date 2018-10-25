@@ -87,9 +87,7 @@ class ShoppingCart extends React.Component {
     //constructor builds state, state includes list of selected items from database
     constructor(props) {
         super(props);
-        const TAX = 0.10; //constant value TAX holds tax for use in later calculations
-        //TODO- look up sales tax for Virginia to enter here, using 10% for development
-
+        
         this.state = {
             cartItems:[
                 {   
@@ -130,6 +128,9 @@ class ShoppingCart extends React.Component {
             subtotalPrice: 0,
             finalTotalPrice: 0
         }
+        const TAX_PERCENT = 0.06; //constant value TAX_PERCENT holds sales tax rate as an integer for use in later calculations
+        //Using Sales tax for northern Virginia area of 6%, our hypothetical business is located here
+
 
         //calcPriceHandler helper function - gives quantity * price result for each line 
         const calcPriceHandler = (localPrice, localQuant) => {
@@ -172,9 +173,21 @@ class ShoppingCart extends React.Component {
         // END SUBTOTAL Calculation
 
 
+
         //TOTAL ORDER PRICE Calculation
-        // this.state.finalTotalPrice = subtotalPrice + (tax * subtotalprice)
-        // let newFinalTotal = this.state.subtotalPrice + (TAX * )      
+        
+        this.state.finalTotalPrice = this.state.subtotalPrice + (TAX_PERCENT * this.state.subtotalPrice); //version not trying to avoid floats- gave up as it introduced too many new errors
+
+        // convert each value to an integer, then divide by 1,000 as equivalent to dividing by 100 twice
+            // this returns the original values to correct decimals and also divides the final value by 100 to finish the percentage calculation
+        // console.log("Subtotal before tax: " + this.state.subtotalPrice);        
+        
+        // let taxCalcVar = (TAX_PERCENT * (this.state.subtotalPrice * 100) ) / 100;
+        // taxCalcVar = (this.state.subtotalPrice * 100) + (taxCalcVar * 100);
+        // taxCalcVar = taxCalcVar / 100;
+        // this.state.finalTotalPrice = taxCalcVar;
+
+        // console.log("Total with tax: " + taxCalcVar);
         
 
         // END TOTAL ORDER PRICE Calculation
@@ -223,20 +236,32 @@ class ShoppingCart extends React.Component {
                     </tr>
                     <tbody>
                         {/* Each row will be a "dumb component" item listing, receiving props from ShoppingCart */}
-                        {/* <SnackItem quantity={this.state.cartItems[0].quantity} 
-                        unitPrice={this.state.cartItems[0].unitPrice} 
-                        calcPrice={this.calcPriceHandler(this.state.cartItems[0].unitPrice)} /> */}
+
                         {this.renderItem(0)}
                         {this.renderItem(1)}
                         {this.renderItem(2)}
                         {this.renderItem(3)}
 
-                        {/* <SnackItem quantity={this.state.cartItems[1].quantity} unitPrice={this.state.cartItems[1].unitPrice} /> */}
-                        {/* <SnackItem quantity={this.state.cartItems[2].quantity} unitPrice={this.state.cartItems[2].unitPrice} /> */}
-                        {/* <SnackItem quantity={this.state.cartItems[3].quantity} unitPrice={this.state.cartItems[3].unitPrice} /> */}
                     </tbody>
 
                 </table>
+
+                <div className="row">
+                    <div className="col"></div>
+                    <div className="col"></div>
+                    <div className="col"></div>
+                    <div className="col">
+                    Subtotal: {this.state.subtotalPrice.toFixed(2)} <br />
+                        Tax: 6%<br />
+                        {/* Tax: {TAX_PERCENT}%<br /> */}
+                        {/* TODO- Solve "undefined" error where this can't read the simple TAX_PERCENT constant*/}
+                        Delivery: FREE!
+                    </div>
+
+                    <div className="col">
+                        <h5>Total: {this.state.finalTotalPrice.toFixed(2)}</h5>
+                    </div>
+                </div>
             </div>
         );
     }
