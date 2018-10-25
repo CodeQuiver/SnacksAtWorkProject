@@ -8,6 +8,8 @@ import Snacks from "./components/Nav/Snacks";
 import Cart from "./components/Nav/Cart";
 import ProductList from "./components/ProductList";
 import  Login from "./Login/Login.js";
+import  Signup from "./Login/Signup.js";
+
 import Delivery from "./Checkout/Delivery.js";
 import Billing from "./Checkout/Billing.js";
 
@@ -25,8 +27,10 @@ const App = () => {
                 </div>
             </div>
             <div><Login /> </div>
-            <div><Billing /></div>
-            <div><Delivery /></div>
+            <div><Signup /> </div>
+
+            {/* <div><Billing /></div>
+            <div><Delivery /></div> */}
             {/* <div className="row"> */}
                 {/* <div className="col-md-8">
                     <ProductList />
@@ -49,7 +53,7 @@ const App = () => {
 
         {/* <ConditionalRenderer /> */}
 
-<Router>
+{/* <Router>
 <div>
   <NavigationTabs/>
       <switch>
@@ -61,7 +65,7 @@ const App = () => {
 </div>
 
 
-  </Router>
+  </Router> */}
 
    
           {/* <h1 className="App-title">Snacks-2-Go</h1>  
