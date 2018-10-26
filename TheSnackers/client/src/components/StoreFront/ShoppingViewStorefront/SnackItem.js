@@ -7,15 +7,11 @@ const SnackItem = (props) => (
         <ul>
            
            <li>Price : {props.price}</li>
-           <li><img width="150px" height="auto" src={"./assets/images/" + props.image}></img></li>
-           <li>Quantity : {props.quantity}</li>
+           <li><img width="200px" height="auto" src={"./assets/images/" + props.image}></img></li>
+           <li>Quantity : <input type="number" defaultValue="1" /></li>
            <li><button id={props.id} onClick = {() => { props.addToCartFunc(props.id); } }>Add to Cart</button></li>
         </ul>
     </div>
-
-
-
-
 
 );
 
